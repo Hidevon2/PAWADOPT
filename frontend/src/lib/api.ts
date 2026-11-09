@@ -38,6 +38,14 @@ api.interceptors.request.use(config => {
   return config
 })
 
+api.interceptors.response.use(response => response, error => {
+  if (axios.isAxiosError(error) && error.response?.status === 401) {
+    sessionStorage.removeItem('pawadopt-token')
+    window.dispatchEvent(new Event('pawadopt:session-ended'))
+  }
+  return Promise.reject(error)
+})
+
 export function errorMessage(error: unknown): string {
   if (axios.isAxiosError(error)) {
     const errors = error.response?.data?.errors
@@ -54,7 +62,10 @@ export interface Pet {
   description: string; traits: string[]; image: string; adoption_fee: number; status: string;
 }
 export interface Application {
-  id: number; reference: string; pet: Pet; status: string; created_at: string;
+  id: number; reference: string; pet: Pet; status: string; created_at: string; review_note?: string | null;
+}
+export function statusLabel(status: string): string {
+  return ({ submitted: 'Submitted', reviewing: 'Under review', approved: 'Approved', rejected: 'Not selected', available: 'Available', on_hold: 'On hold', adopted: 'Adopted', admin: 'Admin', manager: 'Manager', adopter: 'Adopter' } as Record<string, string>)[status] || status
 }
 export function ageLabel(months: number): string {
   if (months < 12) return `${months} months`

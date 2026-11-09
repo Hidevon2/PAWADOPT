@@ -2,13 +2,13 @@
 
 A pet adoption classroom project recreated from the original PawHome screenshot. Built with **Vue 3, Quasar CLI, TypeScript, Pinia, Axios, and Laravel 12**. The default database is SQLite, so XAMPP MySQL does not have to be running.
 
-## Version 3.0.0
+## Version 3.1.0
 
-[Download the Android APK](https://github.com/Hidevon2/PAWADOPT/releases/download/v3.0.0/PAWADOPT-v3.0.0.apk) or open the [v3 release page](https://github.com/Hidevon2/PAWADOPT/releases/tag/v3.0.0) for the APK, checksum, and source backup.
+[Download the Android APK](https://github.com/Hidevon2/PAWADOPT/releases/download/v3.1.0/PAWADOPT-v3.1.0.apk) or open the [v3 release page](https://github.com/Hidevon2/PAWADOPT/releases/tag/v3.1.0) for the APK, checksum, and source backup.
 
-The updated APK is `output/android/PAWADOPT-v3.0.0.apk`. This release fixes the overlapping sign-in button and the matching icons on the contact, adoption, FAQ, and notification interfaces. Mobile forms have larger touch targets, readable inputs, and scrollable dialogs for small screens. Sign-in prevents repeat submission, locks mode changes while a request is running, and clears passwords when closed. The website footer and API health response identify this release as 3.0.0.
+The updated APK is `output/android/PAWADOPT-v3.1.0.apk`. This release adds admin and manager dashboards, pet profile management, application reviews, a contact inbox, admin-only role management, and staff password changes. Approvals update the pet and competing applications together. Role checks are enforced by the Laravel API.
 
-Validation: TypeScript, all 12 Laravel tests (64 assertions), all 4 browser tests, web production build, Capacitor sync, and Android Studio APK build passed. The APK signature and Android version code 3 were verified. Phone installation and native runtime testing are pending. See [ANDROID.md](ANDROID.md) for phone setup.
+Validation: TypeScript, all 17 Laravel tests (114 assertions), all 7 browser tests, web production build, Capacitor sync, and Android Studio APK build passed. Both real starter logins and their permissions were verified. APK signature and Android version code 4 were verified. Phone installation and native runtime testing are pending.
 
 ## Open the app
 
@@ -36,9 +36,14 @@ npm.cmd run dev
 - Guest favorites saved in the browser; account favorites saved in the database. Guest favorites transfer when signing in.
 - Registration, sign in, expiring API tokens, and sign out. Passwords are hashed. No preconfigured account: create your own.
 - Adoption applications with validated fields, duplicate prevention, confirmation reference, and account-specific history.
+- Admin and manager dashboards, application review, pet management, message resolution, role administration, and staff password changes.
 - About, expandable FAQs, contact form with database persistence, and a real Test Backend action calling `GET /api/hello`.
 
-This is a **fictional demonstration**. It does not send email, collect payments, contact shelters, or review applications. There is no staff dashboard. Submitted applications remain Submitted. Do not enter sensitive personal information when demonstrating it.
+This is a **fictional demonstration**. It does not send email, collect payments, or contact real shelters. Staff can record review decisions within the project. Do not enter sensitive personal information when demonstrating it.
+
+## Staff access
+
+See [STAFF.md](STAFF.md) for the role permissions and staff account setup. The requested admin and manager logins exist only in the original local database. On another computer, use `php artisan pawadopt:staff admin admin@pawadopt.test` and `php artisan pawadopt:staff manager manager@pawadopt.test` from `backend`. Generated initial passwords are saved in private local storage and are excluded from GitHub, source ZIPs, and the APK. Staff sign in normally and open their dashboard automatically.
 
 ## First-time setup on another computer
 
@@ -55,7 +60,7 @@ cd ../frontend
 npm.cmd install
 ```
 
-Run `migrate --seed` on the existing project to apply migrations and refresh sample pets. Avoid `migrate:fresh` on a database containing records you want to keep. Back up `backend/database/database.sqlite` to preserve your local accounts, favorites, and applications. Source files are in this project folder; dependency folders can be recreated using the lockfiles.
+Run `migrate --seed` on the existing project to apply migrations and add missing sample pets without overwriting staff edits. Avoid `migrate:fresh` on a database containing records you want to keep. Back up `backend/database/database.sqlite` to preserve your local accounts, favorites, and applications. Source files are in this project folder; dependency folders can be recreated using the lockfiles.
 
 Run `./backup-source.ps1` from PowerShell 7 to create a dated source ZIP, including the photographs and screenshots. It excludes dependency folders, runtime files, local database records, and `.env` secrets. Keep a separate copy of your database if you want to preserve account data.
 
@@ -122,7 +127,7 @@ Client validation improves feedback, but server validation and authorization enf
 
 ## Android work
 
-The v3 Android APK was built successfully in Android Studio on November 9, 2026 and saved as `output/android/PAWADOPT-v3.0.0.apk`. `PAWADOPT-debug.apk` also points to the current build. Its APK signature was verified; phone installation and Android runtime testing are pending. The Capacitor 8 Android project is in `frontend/src-capacitor/android`. Use `./start-mobile-backend.ps1` for the phone's API connection. See [ANDROID.md](ANDROID.md) for installation, verification, and rebuild steps. The mobile app has a Server connection setting, so changing Wi-Fi addresses does not require rebuilding.
+The v3 Android APK was built successfully in Android Studio on November 9, 2026 and saved as `output/android/PAWADOPT-v3.1.0.apk`. `PAWADOPT-debug.apk` also points to the current build. Its APK signature was verified; phone installation and Android runtime testing are pending. The Capacitor 8 Android project is in `frontend/src-capacitor/android`. Use `./start-mobile-backend.ps1` for the phone's API connection. See [ANDROID.md](ANDROID.md) for installation, verification, and rebuild steps. The mobile app has a Server connection setting, so changing Wi-Fi addresses does not require rebuilding.
 
 ## Sources
 

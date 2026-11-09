@@ -40,6 +40,17 @@ class AuthController extends Controller
         return response()->noContent();
     }
 
+    public function changePassword(Request $request)
+    {
+        $data = $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'confirmed', Password::min(12), 'different:current_password'],
+        ]);
+        $request->user()->update(['password' => $data['password']]);
+        ApiToken::where('user_id', $request->user()->id)->where('id', '!=', $request->attributes->get('api_token')->id)->delete();
+        return response()->noContent();
+    }
+
     private function issueToken(User $user): array
     {
         ApiToken::where('user_id', $user->id)->where('expires_at', '<=', now())->delete();

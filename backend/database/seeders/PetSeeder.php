@@ -20,7 +20,7 @@ class PetSeeder extends Seeder
             ['sage', 'Sage', 'Small pets', 'Guinea Pig', 5, 'Female', 'Small', 'Quezon City', 'Small paws, enormous personality. Sage perks up at the rustle of fresh veggies and loves exploring her tunnels. She needs a spacious enclosure, daily hay, and a compatible guinea pig friend.', ['Gentle', 'Loves veggies', 'Social'], 250],
         ];
         foreach ($pets as [$slug, $name, $species, $breed, $age, $gender, $size, $location, $description, $traits, $fee]) {
-            Pet::updateOrCreate(['slug' => $slug], [
+            Pet::firstOrCreate(['slug' => $slug], [
                 'name' => $name, 'species' => $species, 'breed' => $breed, 'age_months' => $age,
                 'gender' => $gender, 'size' => $size, 'location' => $location, 'description' => $description,
                 'traits' => $traits, 'image' => '/images/'.$slug.'.jpg', 'adoption_fee' => $fee, 'status' => 'available',

@@ -17,6 +17,7 @@ frontend/src-capacitor/www/
 **/.env.*.local
 **/database/*.sqlite*
 **/storage/logs/*
+backend/storage/app/private/staff-logins.txt
 **/storage/framework/cache/data/*
 **/storage/framework/sessions/*
 **/storage/framework/views/*

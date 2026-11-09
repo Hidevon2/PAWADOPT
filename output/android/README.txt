@@ -1,6 +1,6 @@
-PAWADOPT v3.0.0
+PAWADOPT v3.1.0
 
-Install PAWADOPT-v3.0.0.apk on your Android phone (Android 7.0 or later).
+Install PAWADOPT-v3.1.0.apk on your Android phone (Android 7.0 or later).
 PAWADOPT-debug.apk is the same current build under the older filename.
 Both are debug-signed classroom builds.
 
@@ -14,3 +14,7 @@ For sign-in and pet data:
 The APK includes the frontend. Laravel and the database stay on the computer.
 Phone installation and native runtime testing are pending.
 Full setup and verification instructions are in ANDROID.md.
+
+Admin and manager dashboards are included. Staff sign in through the normal form.
+Staff credentials belong to the configured Laravel server, not the APK.
+See STAFF.md for setup. Private initial passwords are not included in this release.

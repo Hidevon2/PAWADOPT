@@ -47,6 +47,9 @@ p { line-height: 1.75; }
 .secondary { font-size: 11px; min-height: 41px; margin-bottom: 2px; }
 .secondary .paw-icon { font-size: 19px; }
 .sidebar-bottom { margin-top: auto; padding-top: 30px; }
+.sidebar { overflow-y: auto; overscroll-behavior: contain; }
+.sidebar-bottom { flex-shrink: 0; }
+.application-review-note { font-size: 11px; color: var(--muted); margin-top: 10px; white-space: pre-wrap; overflow-wrap: anywhere; max-width: 560px; }
 .sidebar-note { border-radius: 12px; padding: 19px 18px; background: linear-gradient(135deg, #314737, #253a2d); position: relative; overflow: hidden; color: #e9efdf; }
 .sidebar-note::after { content: '✧'; position: absolute; right: 12px; top: 12px; color: #e8c486; font-size: 30px; transform: rotate(-20deg); opacity: .65; }
 .note-icon { color: #c6d8ad; margin-bottom: 14px; }

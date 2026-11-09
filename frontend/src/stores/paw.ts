@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { onScopeDispose, ref } from 'vue'
 import { api, type Pet } from '../lib/api'
 
 function guestFavorites(): number[] {
@@ -13,10 +13,13 @@ export const usePawStore = defineStore('paw', () => {
   const pets = ref<Pet[]>([])
   const loading = ref(true)
   const catalogError = ref(false)
-  const user = ref<{ id: number; name: string; email: string } | null>(null)
+  const user = ref<{ id: number; name: string; email: string; role: 'adopter' | 'manager' | 'admin' } | null>(null)
   const favorites = ref<number[]>(guestFavorites())
   const saving = ref<number[]>([])
   const connected = ref(false)
+  const endSession = () => { user.value = null; favorites.value = guestFavorites(); saving.value = [] }
+  window.addEventListener('pawadopt:session-ended', endSession)
+  onScopeDispose(() => window.removeEventListener('pawadopt:session-ended', endSession))
 
   async function loadPets() {
     loading.value = true

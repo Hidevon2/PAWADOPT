@@ -14,7 +14,7 @@ const imageFailed = ref(false)
         <img v-if="!imageFailed" :src="pet.image" :alt="`${pet.name}, ${pet.breed}`" loading="lazy" @error="imageFailed = true" />
         <PawIcon v-else name="pets" class="image-fallback" />
       </button>
-      <span class="available-pill"><span />{{ pet.status === 'available' ? 'Ready for a home' : 'Adopted' }}</span>
+      <span class="available-pill"><span />{{ pet.status === 'available' ? 'Ready for a home' : pet.status === 'on_hold' ? 'On hold' : 'Adopted' }}</span>
       <button class="save-button" :class="{ saved }" :disabled="saving" :aria-label="`${saved ? 'Unsave' : 'Save'} ${pet.name}`" :aria-pressed="saved" @click="$emit('save', pet.id)"><PawIcon name="favorite" :filled="saved" /></button>
     </div>
     <div class="pet-card-body">

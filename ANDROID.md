@@ -2,9 +2,9 @@
 
 The existing Vue 3 + Quasar application now has a Capacitor 8 Android project in `frontend/src-capacitor/android`. Its app ID is `com.hidevon2.pawadopt`, and its display name is **PAWADOPT**.
 
-Public download: [PAWADOPT v3.0.0 APK](https://github.com/Hidevon2/PAWADOPT/releases/download/v3.0.0/PAWADOPT-v3.0.0.apk). The [release page](https://github.com/Hidevon2/PAWADOPT/releases/tag/v3.0.0) also includes the checksum and source backup.
+Public download: [PAWADOPT v3.1.0 APK](https://github.com/Hidevon2/PAWADOPT/releases/download/v3.1.0/PAWADOPT-v3.1.0.apk). The [release page](https://github.com/Hidevon2/PAWADOPT/releases/tag/v3.1.0) also includes the checksum and source backup.
 
-**Current status (November 9, 2026): v3 APK built successfully in Android Studio.** The installable file is `output/android/PAWADOPT-v3.0.0.apk` (12,755,458 bytes); `PAWADOPT-debug.apk` is an identical latest-build copy. Package: `com.hidevon2.pawadopt`, version 3.0.0, version code 3, minimum Android 7.0 (API 24), target API 36. Android's `apksigner verify --verbose` verified its APK v2 signature. SHA-256: `859C77E186F754CECD52122C872AEAF1B36FCA830BF8B0AB622303E9E8961698`. All 12 API tests and 4 browser tests pass. Installation and Android runtime testing are still pending.
+**Current status (November 9, 2026): v3.1.0 APK built successfully in Android Studio.** File: `output/android/PAWADOPT-v3.1.0.apk` (12,857,578 bytes); `PAWADOPT-debug.apk` is the identical latest-build copy. Package: `com.hidevon2.pawadopt`, version 3.1.0, code 4, minimum API 24, target API 36. APK v2 signature verified. SHA-256: `32DA2C4D48D845B41710B4168EAD4E96AF873D0EACBCE3D25641E8B677C5BB41`. All 17 API tests and 7 browser tests pass. Phone installation and Android runtime testing remain pending.
 
 ## Build the APK
 
@@ -35,10 +35,14 @@ The script uses the installed Android Studio Java 25 runtime and a project-local
 Successful output:
 
 ```text
-output/android/PAWADOPT-v3.0.0.apk
+output/android/PAWADOPT-v3.1.0.apk
 ```
 
 The original Gradle output is `frontend/src-capacitor/android/app/build/outputs/apk/debug/app-debug.apk`. This is a debug-signed classroom APK for direct installation, not a Play Store release.
+
+## Staff logins
+
+Admin and manager dashboards are included in this APK. Staff accounts live in Laravel, and the initial passwords are saved only on the computer that creates them. Use the normal sign-in form and follow [STAFF.md](STAFF.md). Update the backend and run `php artisan migrate` before using this APK with an older server.
 
 ## Connect your phone to Laravel
 
@@ -70,7 +74,7 @@ Local HTTP is enabled only in the Android **debug** build to support the classro
 
 ## Install and verify
 
-Copy `output/android/PAWADOPT-v3.0.0.apk` to your phone, open it, and approve Android's installation prompt yourself. Alternatively, after you enable USB debugging and authorize the computer:
+Copy `output/android/PAWADOPT-v3.1.0.apk` to your phone, open it, and approve Android's installation prompt yourself. Alternatively, after you enable USB debugging and authorize the computer:
 
 ```powershell
 & "$env:LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe" devices
