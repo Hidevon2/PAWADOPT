@@ -4,6 +4,8 @@ A pet adoption classroom project recreated from the original PawHome screenshot.
 
 ## Version 3.0.0
 
+[Download the Android APK](https://github.com/Hidevon2/PAWADOPT/releases/download/v3.0.0/PAWADOPT-v3.0.0.apk) or open the [v3 release page](https://github.com/Hidevon2/PAWADOPT/releases/tag/v3.0.0) for the APK, checksum, and source backup.
+
 The updated APK is `output/android/PAWADOPT-v3.0.0.apk`. This release fixes the overlapping sign-in button and the matching icons on the contact, adoption, FAQ, and notification interfaces. Mobile forms have larger touch targets, readable inputs, and scrollable dialogs for small screens. Sign-in prevents repeat submission, locks mode changes while a request is running, and clears passwords when closed. The website footer and API health response identify this release as 3.0.0.
 
 Validation: TypeScript, all 12 Laravel tests (64 assertions), all 4 browser tests, web production build, Capacitor sync, and Android Studio APK build passed. The APK signature and Android version code 3 were verified. Phone installation and native runtime testing are pending. See [ANDROID.md](ANDROID.md) for phone setup.

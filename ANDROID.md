@@ -2,6 +2,8 @@
 
 The existing Vue 3 + Quasar application now has a Capacitor 8 Android project in `frontend/src-capacitor/android`. Its app ID is `com.hidevon2.pawadopt`, and its display name is **PAWADOPT**.
 
+Public download: [PAWADOPT v3.0.0 APK](https://github.com/Hidevon2/PAWADOPT/releases/download/v3.0.0/PAWADOPT-v3.0.0.apk). The [release page](https://github.com/Hidevon2/PAWADOPT/releases/tag/v3.0.0) also includes the checksum and source backup.
+
 **Current status (November 9, 2026): v3 APK built successfully in Android Studio.** The installable file is `output/android/PAWADOPT-v3.0.0.apk` (12,755,458 bytes); `PAWADOPT-debug.apk` is an identical latest-build copy. Package: `com.hidevon2.pawadopt`, version 3.0.0, version code 3, minimum Android 7.0 (API 24), target API 36. Android's `apksigner verify --verbose` verified its APK v2 signature. SHA-256: `859C77E186F754CECD52122C872AEAF1B36FCA830BF8B0AB622303E9E8961698`. All 12 API tests and 4 browser tests pass. Installation and Android runtime testing are still pending.
 
 ## Build the APK
