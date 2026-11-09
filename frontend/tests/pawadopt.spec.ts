@@ -1,5 +1,56 @@
 import { test, expect } from '@playwright/test'
 
+test('v3 mobile sign in renders its icon, handles errors, and prevents duplicate requests', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto('/')
+  await page.getByRole('button', { name: 'Sign in', exact: true }).click()
+  const dialog = page.locator('.auth-dialog')
+  const submit = dialog.getByRole('button', { name: 'Sign in', exact: true }).last()
+  await page.evaluate(() => document.fonts.ready)
+  const icon = submit.locator('.q-icon')
+  await expect(icon).toHaveCSS('font-family', /Material Symbols Rounded/i)
+  await page.evaluate(() => Promise.all(document.getAnimations().map(animation => animation.finished)))
+  const geometry = await submit.evaluate(button => {
+    const label = button.querySelector('.q-btn__content > span')!.getBoundingClientRect()
+    const glyph = button.querySelector('.q-icon')!.getBoundingClientRect()
+    return { separated: label.right <= glyph.left, inside: glyph.right <= button.getBoundingClientRect().right }
+  })
+  expect(geometry).toEqual({ separated: true, inside: true })
+  await page.screenshot({ path: '../screenshots/v3-login-mobile.png' })
+  await page.getByLabel('Email address', { exact: true }).fill('ui@example.test')
+  await page.getByLabel('Password', { exact: true }).fill('incorrect-password')
+  await page.getByRole('button', { name: 'Show password', exact: true }).click()
+  await expect(page.getByLabel('Password', { exact: true })).toHaveAttribute('type', 'text')
+  await page.getByRole('button', { name: 'Hide password', exact: true }).click()
+  await page.route('**/api/login', route => route.fulfill({ status: 422, json: { errors: { email: ['The email or password is incorrect.'] } } }))
+  await submit.click()
+  await expect(dialog.getByRole('alert')).toHaveText('The email or password is incorrect.')
+  await page.setViewportSize({ width: 320, height: 430 })
+  await submit.scrollIntoViewIfNeeded()
+  await expect(submit).toBeInViewport()
+  expect(await dialog.evaluate(el => el.scrollWidth <= el.clientWidth)).toBeTruthy()
+  let requests = 0
+  let releaseLogin!: () => void
+  const responseReady = new Promise<void>(resolve => { releaseLogin = resolve })
+  await page.unroute('**/api/login')
+  await page.route('**/api/login', async route => {
+    requests++
+    await responseReady
+    await route.fulfill({ json: { user: { id: 999, name: 'UI Test', email: 'ui@example.test' }, token: 'test-only-token' } })
+  })
+  await page.route('**/api/favorites', route => route.fulfill({ json: { data: [] } }))
+  await page.getByLabel('Password', { exact: true }).fill('test-password')
+  await submit.click()
+  try {
+    await expect(dialog.getByRole('button', { name: 'Create account', exact: true })).toBeDisabled()
+    await expect(page.getByRole('button', { name: 'Close sign in' })).toBeDisabled()
+    expect(requests).toBe(1)
+  } finally { releaseLogin() }
+  await expect(dialog).not.toBeVisible()
+  await expect(page.getByText('Hi, UI')).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Sign out', exact: true })).toBeVisible()
+})
+
 test('home loads real catalog, assets, search, saved pets, and backend check', async ({ page }) => {
   const errors: string[] = []
   page.on('pageerror', error => errors.push(error.message))

@@ -1,6 +1,12 @@
-# PAWADOPT
+# PAWADOPT v3
 
 A pet adoption classroom project recreated from the original PawHome screenshot. Built with **Vue 3, Quasar CLI, TypeScript, Pinia, Axios, and Laravel 12**. The default database is SQLite, so XAMPP MySQL does not have to be running.
+
+## Version 3.0.0
+
+The updated APK is `output/android/PAWADOPT-v3.0.0.apk`. This release fixes the overlapping sign-in button and the matching icons on the contact, adoption, FAQ, and notification interfaces. Mobile forms have larger touch targets, readable inputs, and scrollable dialogs for small screens. Sign-in prevents repeat submission, locks mode changes while a request is running, and clears passwords when closed. The website footer and API health response identify this release as 3.0.0.
+
+Validation: TypeScript, all 12 Laravel tests (64 assertions), all 4 browser tests, web production build, Capacitor sync, and Android Studio APK build passed. The APK signature and Android version code 3 were verified. Phone installation and native runtime testing are pending. See [ANDROID.md](ANDROID.md) for phone setup.
 
 ## Open the app
 
@@ -114,7 +120,7 @@ Client validation improves feedback, but server validation and authorization enf
 
 ## Android work
 
-This deliverable is the local web application. No Android project or APK has been generated. Quasar CLI can add a Capacitor target in a follow-up step. A phone needs a reachable API URL; `127.0.0.1` on a phone refers to the phone, not this computer. The Axios client accepts `VITE_API_URL` for that configuration. Local Laravel must also be served on the appropriate network interface with the frontend origin allowed in `CORS_ALLOWED_ORIGINS`. Use HTTPS for any deployment beyond local development.
+The v3 Android APK was built successfully in Android Studio on November 9, 2026 and saved as `output/android/PAWADOPT-v3.0.0.apk`. `PAWADOPT-debug.apk` also points to the current build. Its APK signature was verified; phone installation and Android runtime testing are pending. The Capacitor 8 Android project is in `frontend/src-capacitor/android`. Use `./start-mobile-backend.ps1` for the phone's API connection. See [ANDROID.md](ANDROID.md) for installation, verification, and rebuild steps. The mobile app has a Server connection setting, so changing Wi-Fi addresses does not require rebuilding.
 
 ## Sources
 

@@ -1,7 +1,33 @@
 import axios from 'axios'
 
+export const isNativeApp = process.env.MODE === 'capacitor'
+export const defaultApiUrl = process.env.PAW_API_URL || '/api'
+
+export function normalizeApiUrl(value: string): string {
+  const url = new URL(value.trim())
+  if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password || url.search || url.hash) {
+    throw new Error('Enter a plain HTTP or HTTPS server address, without a username, password, query, or fragment.')
+  }
+  url.pathname = url.pathname.replace(/\/+$/, '')
+  if (!url.pathname.endsWith('/api')) url.pathname += '/api'
+  return url.toString().replace(/\/+$/, '')
+}
+
+export function getApiUrl(): string {
+  if (!isNativeApp) return import.meta.env.VITE_API_URL || '/api'
+  const saved = localStorage.getItem('pawadopt-api-url')
+  try { return normalizeApiUrl(saved || defaultApiUrl) }
+  catch { return defaultApiUrl }
+}
+
+export function saveApiUrl(value: string): void {
+  const normalized = normalizeApiUrl(value)
+  if (normalized !== getApiUrl()) sessionStorage.removeItem('pawadopt-token')
+  localStorage.setItem('pawadopt-api-url', normalized)
+}
+
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL: getApiUrl(),
   timeout: 12000,
   headers: { Accept: 'application/json' },
 })

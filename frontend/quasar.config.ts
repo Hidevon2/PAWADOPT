@@ -1,12 +1,17 @@
 import { defineConfig } from '#q-app/wrappers'
 
-export default defineConfig(() => ({
+export default defineConfig(ctx => ({
   boot: [],
   css: ['app.scss'],
   extras: ['material-symbols-rounded'],
   build: {
     target: { browser: ['es2022', 'chrome115', 'firefox115', 'safari14'] },
     vueRouterMode: 'hash',
+    env: {
+      PAW_API_URL: 'capacitor' in ctx.mode
+        ? (process.env.PAWADOPT_API_URL || 'http://192.168.254.156:8000/api')
+        : '',
+    },
   },
   devServer: {
     host: '127.0.0.1',
@@ -20,4 +25,7 @@ export default defineConfig(() => ({
     plugins: ['Notify', 'Dialog'],
   },
   animations: [],
+  capacitor: {
+    hideSplashscreen: true,
+  },
 }))

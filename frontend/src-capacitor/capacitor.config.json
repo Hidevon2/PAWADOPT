@@ -1,0 +1,11 @@
+{
+  "appId": "com.hidevon2.pawadopt",
+  "appName": "PAWADOPT",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "http"
+  },
+  "android": {
+    "backgroundColor": "#121b19"
+  }
+}

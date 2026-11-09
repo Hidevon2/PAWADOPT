@@ -22,6 +22,23 @@ class PawAdoptTest extends TestCase
         ])->assertCreated()->json('token');
     }
 
+    public function test_android_webview_origin_can_send_authenticated_api_requests(): void
+    {
+        $this->options('/api/favorites', [], [
+            'Origin' => 'http://localhost',
+            'Access-Control-Request-Method' => 'GET',
+            'Access-Control-Request-Headers' => 'authorization,content-type',
+        ])->assertNoContent()->assertHeader('Access-Control-Allow-Origin', 'http://localhost');
+    }
+
+    public function test_unlisted_origins_do_not_receive_cross_origin_access(): void
+    {
+        $this->options('/api/favorites', [], [
+            'Origin' => 'https://unlisted.example.test',
+            'Access-Control-Request-Method' => 'GET',
+        ])->assertHeaderMissing('Access-Control-Allow-Origin');
+    }
+
     public function test_catalog_and_database_health_are_public(): void
     {
         $this->seed(PetSeeder::class);

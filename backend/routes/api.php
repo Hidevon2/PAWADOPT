@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/hello', function () {
     DB::select('SELECT 1');
-    return response()->json(['message' => 'Hello from PAWADOPT! Laravel API and database are connected.', 'database' => 'connected']);
+    return response()->json(['message' => 'Hello from PAWADOPT! Laravel API and database are connected.', 'database' => 'connected', 'version' => config('pawadopt.version')]);
 });
 Route::get('/pets', [PetController::class, 'index']);
 Route::get('/pets/{pet}', fn (Pet $pet) => response()->json(['data' => $pet]));

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pawadopt_orange">#F39152</color>
+    <color name="pawadopt_dark">#121B19</color>
+    <color name="colorPrimary">#F39152</color>
+    <color name="colorPrimaryDark">#121B19</color>
+    <color name="colorAccent">#AED1AF</color>
+</resources>

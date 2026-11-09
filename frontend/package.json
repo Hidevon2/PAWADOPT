@@ -1,6 +1,8 @@
 {
   "name": "pawadopt-frontend",
-  "version": "1.0.0",
+  "productName": "PAWADOPT",
+  "description": "Find your new best friend with PAWADOPT.",
+  "version": "3.0.0",
   "private": true,
   "type": "module",
   "scripts": {

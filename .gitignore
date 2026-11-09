@@ -2,6 +2,16 @@
 **/vendor/
 **/.quasar/
 **/dist/
+**/.gradle/
+**/.idea/
+**/build/
+**/local.properties
+frontend/src-capacitor/www/
+.android-tools/
+*.apk
+*.aab
+*.keystore
+*.jks
 **/.env
 **/.env.*
 **/.env.*.local

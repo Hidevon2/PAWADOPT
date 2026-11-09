@@ -1,0 +1,12 @@
+{
+  "name": "pawadopt-frontend",
+  "version": "3.0.0",
+  "description": "Find your new best friend with PAWADOPT.",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/app": "^8.0.0",
+    "@capacitor/cli": "^8.0.0",
+    "@capacitor/core": "^8.0.0"
+  }
+}
