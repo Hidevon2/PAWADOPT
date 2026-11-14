@@ -129,6 +129,14 @@ Client validation improves feedback, but server validation and authorization enf
 
 The v3 Android APK was built successfully in Android Studio on November 9, 2026 and saved as `output/android/PAWADOPT-v3.1.0.apk`. `PAWADOPT-debug.apk` also points to the current build. Its APK signature was verified; phone installation and Android runtime testing are pending. The Capacitor 8 Android project is in `frontend/src-capacitor/android`. Use `./start-mobile-backend.ps1` for the phone's API connection. See [ANDROID.md](ANDROID.md) for installation, verification, and rebuild steps. The mobile app has a Server connection setting, so changing Wi-Fi addresses does not require rebuilding.
 
+## Render deployment
+
+The root `render.yaml` defines a Docker web service and a dedicated PostgreSQL database. In Render, connect this repository as a Blueprint and select the Free plans if prompted. The first deploy builds the Quasar site, serves it with the Laravel API from the same service, runs database migrations, and loads the sample pets and staff accounts.
+
+The seeded staff emails are `admin@pawadopt.test` and `manager@pawadopt.test`. Render generates both passwords; view `PAWADOPT_ADMIN_PASSWORD` and `PAWADOPT_MANAGER_PASSWORD` in the web service's Environment page after the Blueprint is created. Keep those values private. Existing staff passwords are not reset by later deploys.
+
+The free Render web service can sleep when idle, so its first request may take a while. Render Free PostgreSQL is temporary and expires after 30 days; use this deployment for a demo, and export any data you need before the database expires.
+
 ## Sources
 
 - [Quasar CLI documentation](https://quasar.dev/start/quasar-cli)

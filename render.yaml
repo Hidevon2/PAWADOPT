@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: pawadopt
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /up
+    envVars:
+      - key: APP_NAME
+        value: PAWADOPT
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        generateValue: true
+      - key: LOG_LEVEL
+        value: warning
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_URL
+        fromDatabase:
+          name: pawadopt-db
+          property: connectionString
+      - key: SESSION_DRIVER
+        value: file
+      - key: CACHE_STORE
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: PAWADOPT_ADMIN_EMAIL
+        value: admin@pawadopt.test
+      - key: PAWADOPT_ADMIN_PASSWORD
+        generateValue: true
+      - key: PAWADOPT_MANAGER_EMAIL
+        value: manager@pawadopt.test
+      - key: PAWADOPT_MANAGER_PASSWORD
+        generateValue: true
+
+databases:
+  - name: pawadopt-db
+    databaseName: pawadopt
+    user: pawadopt
+    plan: free
+    region: singapore
+    postgresMajorVersion: "16"
